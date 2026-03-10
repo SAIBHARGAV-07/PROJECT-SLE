@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Sustainable Living</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<div class="top-header">
+    <div class="header-left">
+        <div class="logo">🌱 Sustainable Living</div>
+        <div class="search-bar">
+            <input type="text" placeholder="🔍 Search users, projects...">
+        </div>
+    </div>
+    <div class="header-right">
+        <button class="dark-toggle" onclick="toggleDark()" title="Toggle Dark Mode">🌙</button>
+        <div class="profile-menu">
+            <button class="profile-btn" onclick="toggleProfile()">
+                <span>👨‍💼 Admin</span>
+                <span>▼</span>
+            </button>
+            <div id="profileDropdown" class="profile-dropdown">
+                <a href="#" onclick="editProfile(event)">⚙️ Edit Profile</a>
+                <a href="#" onclick="settings(event)">⚙️ Settings</a>
+                <hr>
+                <a href="#" onclick="logout(event)" style="color: #e74c3c;">🚪 Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SIDEBAR NAVIGATION -->
+<div class="sidebar">
+    <nav class="nav-menu">
+        <a href="#" class="nav-item active" onclick="switchTab('dashboard', event)">📊 Dashboard</a>
+        <a href="#" class="nav-item" onclick="switchTab('users', event)">👥 Users</a>
+        <a href="#" class="nav-item" onclick="switchTab('projects', event)">📁 Projects</a>
+        <a href="#" class="nav-item" onclick="switchTab('lessons', event)">📚 Lessons</a>
+        <a href="#" class="nav-item" onclick="switchTab('analytics', event)">📈 Analytics</a>
+        <a href="#" class="nav-item" onclick="switchTab('settings', event)">⚙️ Settings</a>
+    </nav>
+</div>
+
+<!-- MAIN CONTENT AREA -->
+<div class="main-container">
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard-section" class="tab-section active">
+        <div class="section-header">
+            <h1>📊 Dashboard Overview</h1>
+            <p>Platform statistics and quick insights</p>
+        </div>
+
+        <!-- QUICK STATS -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <h3>Total Users</h3>
+                    <p class="stat-value" id="totalUsers">1,245</p>
+                    <span class="stat-change">↑ 12% this week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📁</div>
+                <div class="stat-content">
+                    <h3>Active Projects</h3>
+                    <p class="stat-value" id="activeProjects">28</p>
+                    <span class="stat-change">↑ 3 new this week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3>Lessons Published</h3>
+                    <p class="stat-value">156</p>
+                    <span class="stat-change">↑ 5 new this week</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-content">
+                    <h3>Avg Eco Score</h3>
+                    <p class="stat-value">78%</p>
+                    <span class="stat-change">↑ 2% improvement</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENGAGEMENT METRICS -->
+        <div class="metrics-row">
+            <div class="metric-card">
+                <h3>User Engagement</h3>
+                <div class="progress-item">
+                    <label>Lessons Completion</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%;"></div>
+                    </div>
+                    <span class="progress-text">65%</span>
+                </div>
+                <div class="progress-item">
+                    <label>Project Participation</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%;"></div>
+                    </div>
+                    <span class="progress-text">50%</span>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <h3>Top Locations</h3>
+                <table class="location-table">
+                    <tr>
+                        <td>Karnataka</td>
+                        <td><strong>120</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Maharashtra</td>
+                        <td><strong>140</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Tamil Nadu</td>
+                        <td><strong>95</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Telangana</td>
+                        <td><strong>80</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- USERS SECTION -->
+    <section id="users-section" class="tab-section">
+        <div class="section-header">
+            <h1>👥 User Management</h1>
+            <p>Manage and monitor all platform users</p>
+        </div>
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterUsers('all', event)">All Users</button>
+            <button class="filter-btn" onclick="filterUsers('active', event)">Active</button>
+            <button class="filter-btn" onclick="filterUsers('inactive', event)">Inactive</button>
+        </div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#U001</td>
+                    <td>Bhargav Kumar</td>
+                    <td>bhargav@email.com</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>Jan 15, 2026</td>
+                    <td><button class="action-btn">View</button></td>
+                </tr>
+                <tr>
+                    <td>#U002</td>
+                    <td>Sneha Patel</td>
+                    <td>sneha@email.com</td>
+                    <td><span class="badge active">Active</span></td>
+                    <td>Jan 20, 2026</td>
+                    <td><button class="action-btn">View</button></td>
+                </tr>
+                <tr>
+                    <td>#U003</td>
+                    <td>Aarav Singh</td>
+                    <td>aarav@email.com</td>
+                    <td><span class="badge inactive">Inactive</span></td>
+                    <td>Feb 1, 2026</td>
+                    <td><button class="action-btn">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects-section" class="tab-section">
+        <div class="section-header">
+            <h1>📁 Project Management</h1>
+            <p>Create and manage sustainability projects</p>
+        </div>
+        <div class="add-project-form">
+            <input type="text" id="projectName" placeholder="Project name">
+            <button onclick="addProject()">+ Add Project</button>
+        </div>
+        <div class="projects-grid">
+            <div class="project-item">
+                <h4>Recycling Initiative</h4>
+                <p>Community-wide recycling program</p>
+                <div class="project-stats">
+                    <span>👥 145 participants</span>
+                    <span>📈 8,450 points earned</span>
+                </div>
+            </div>
+            <div class="project-item">
+                <h4>Energy Conservation</h4>
+                <p>Reduce household energy consumption</p>
+                <div class="project-stats">
+                    <span>👥 92 participants</span>
+                    <span>📈 5,230 points earned</span>
+                </div>
+            </div>
+            <div class="project-item">
+                <h4>Water Awareness</h4>
+                <p>Save water and raise awareness</p>
+                <div class="project-stats">
+                    <span>👥 67 participants</span>
+                    <span>📈 3,890 points earned</span>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 30px;">
+            <h3>Project List</h3>
+            <ul id="projectList" class="project-list"></ul>
+        </div>
+    </section>
+
+    <!-- LESSONS SECTION -->
+    <section id="lessons-section" class="tab-section">
+        <div class="section-header">
+            <h1>📚 Lesson Management</h1>
+            <p>Create and manage educational content</p>
+        </div>
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterLessons('all', event)">All Lessons</button>
+            <button class="filter-btn" onclick="filterLessons('published', event)">Published</button>
+            <button class="filter-btn" onclick="filterLessons('draft', event)">Draft</button>
+        </div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Lesson ID</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Students</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#L001</td>
+                    <td>Introduction to Renewable Energy</td>
+                    <td>Energy</td>
+                    <td><span class="badge success">Published</span></td>
+                    <td>340</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>#L002</td>
+                    <td>Plastic Waste Management</td>
+                    <td>Waste</td>
+                    <td><span class="badge success">Published</span></td>
+                    <td>285</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>#L003</td>
+                    <td>Water Conservation Techniques</td>
+                    <td>Water</td>
+                    <td><span class="badge warning">Draft</span></td>
+                    <td>0</td>
+                    <td><button class="action-btn">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ANALYTICS SECTION -->
+    <section id="analytics-section" class="tab-section">
+        <div class="section-header">
+            <h1>📈 Analytics & Reports</h1>
+            <p>Platform performance and user insights</p>
+        </div>
+            <!-- KPI Cards -->
+            <div class="analytics-kpis">
+                <div class="kpi-card">
+                    <div class="kpi-title">Total Users</div>
+                    <div class="kpi-value" id="kpiTotalUsers">1,245</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Active Projects</div>
+                    <div class="kpi-value" id="kpiActiveProjects">28</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Lessons Published</div>
+                    <div class="kpi-value" id="kpiLessons">156</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-title">Avg Eco Score</div>
+                    <div class="kpi-value" id="kpiEcoScore">78%</div>
+                </div>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="chart-card">
+                    <h3>Users by Region</h3>
+                    <canvas id="userChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Projects Overview</h3>
+                    <canvas id="projectChart"></canvas>
+                </div>
+            </div>
+    </section>
+
+    <!-- SETTINGS SECTION -->
+    <section id="settings-section" class="tab-section">
+        <div class="section-header">
+            <h1>⚙️ Admin Settings</h1>
+            <p>Configure platform settings and preferences</p>
+        </div>
+        <div class="settings-card">
+            <h3>General Settings</h3>
+            <div class="setting-item">
+                <label>Platform Name</label>
+                <input type="text" value="Sustainable Living" readonly>
+            </div>
+            <div class="setting-item">
+                <label>Email Notifications</label>
+                <input type="checkbox" checked>
+            </div>
+        </div>
+        <div class="settings-card">
+            <h3>Security Settings</h3>
+            <div class="setting-item">
+                <label>Change Admin Password</label>
+                <button class="setting-btn">Update Password</button>
+            </div>
+            <div class="setting-item">
+                <label>Two-Factor Authentication</label>
+                <input type="checkbox">
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="js/fake-data.js"></script>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/admin-dashboard.js"></script>
+</body>
+</html>

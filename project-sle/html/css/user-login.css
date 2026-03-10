@@ -1,0 +1,76 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    font-family: Arial, sans-serif;
+    transition: background 0.3s ease;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    width: 320px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background: #27ae60;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-box button:hover {
+    background: #229954;
+}
+
+body.dark {
+    background: linear-gradient(135deg, #1a3a2a, #0f250f);
+}
+
+body.dark .login-box {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+body.dark .login-box h2 {
+    color: #e0e0e0;
+}
+
+body.dark .login-box input {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark .login-box button {
+    background: #27ae60;
+}
+
+body.dark .login-box button:hover {
+    background: #229954;
+}

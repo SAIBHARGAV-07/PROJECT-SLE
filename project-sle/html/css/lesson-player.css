@@ -1,0 +1,8 @@
+/* Lesson player styles */
+.step-wrapper { margin-top:18px; }
+.step-content { background: white; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+.step-nav { margin-top:10px; display:flex; gap:12px; align-items:center; }
+.quiz-section { margin-top:18px; }
+.quiz-item { background:#fff; padding:12px; border-radius:8px; margin-bottom:10px; box-shadow:0 4px 12px rgba(0,0,0,0.04); }
+.quiz-item button { padding:8px 12px; border-radius:6px; border:none; background:#27ae60; color:#fff; cursor:pointer; }
+body.dark .step-content, body.dark .quiz-item { background:#171717; color:#e0e0e0; border:1px solid #222 }

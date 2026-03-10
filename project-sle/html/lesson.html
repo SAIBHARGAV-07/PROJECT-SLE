@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lessons - Sustainable Living</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/lesson-player.css">
+    <style>
+        .lesson-list { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .lesson-item { background:white; padding:18px; border-radius:10px; margin-bottom:14px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+        .lesson-item h2 { margin:0 0 8px 0; }
+        .lesson-item .meta { color:#666; margin-bottom:10px; }
+        .lesson-content { max-width:900px; margin:20px auto; padding:0 20px; }
+        .back-link { display:inline-block; margin: 18px 0; }
+        @media (max-width:768px){ .lesson-list{padding:0 12px} }
+        body.dark .lesson-item, body.dark .lesson-content { background:#171717; color:#e0e0e0; border:1px solid #222 }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>📘 Lessons</h1>
+        <a href="user-dashboard.html">Back to Dashboard</a>
+    </div>
+</header>
+
+<main>
+    <section class="lesson-list" id="lesson-list">
+        <h2>Available Lessons</h2>
+        <div id="lessons-placeholder">Loading lessons...</div>
+    </section>
+
+    <section class="lesson-content" id="lesson-content" style="display:none;">
+        <a class="back-link" href="#" onclick="showList();return false;">← Back to lessons</a>
+        <div id="lesson-render"></div>
+        <div id="lesson-actions" style="margin-top:18px;">
+            <button id="mark-complete" style="padding:10px 14px;border-radius:8px;background:#27ae60;color:#fff;border:none;cursor:pointer;">Mark Complete</button>
+        </div>
+    </section>
+</main>
+
+<footer>
+    © 2026 Sustainable Living Platform
+</footer>
+
+<script>
+function getLessons(){return JSON.parse(localStorage.getItem('lessons')||'[]');}
+
+function renderList(){
+    const container = document.getElementById('lessons-placeholder');
+    const lessons = getLessons().filter(l=>l.published);
+    if(!lessons.length){ container.innerHTML = '<p>No published lessons yet.</p>'; return; }
+    container.innerHTML = '';
+    lessons.forEach(l=>{
+        const div = document.createElement('div');
+        div.className = 'lesson-item';
+        div.innerHTML = `<h2>${escapeHtml(l.title)}</h2><div class="meta">${escapeHtml(l.category||'')} • ${new Date(l.created||l.updated||Date.now()).toLocaleDateString()}</div><p>${escapeHtml(l.summary||'')}</p><p><a href="#" onclick="openLesson('${l.id}');return false;">Open lesson →</a></p>`;
+        container.appendChild(div);
+    });
+}
+
+function openLesson(id){
+    const lessons = getLessons();
+    const l = lessons.find(x=>x.id===id);
+    if(!l) return alert('Lesson not found');
+    document.getElementById('lesson-render').innerHTML = `<h2>${l.title}</h2><div class="meta">${l.category||''}</div><div class="body">${l.content||'<p>(No content)</p>'}</div>`;
+    document.getElementById('lesson-list').style.display='none';
+    document.getElementById('lesson-content').style.display='block';
+    window.scrollTo(0,0);
+}
+
+function showList(){ document.getElementById('lesson-content').style.display='none'; document.getElementById('lesson-list').style.display='block'; }
+
+function escapeHtml(s){ if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// If an id param is provided, open that lesson directly
+function getQueryParam(name){ const params = new URLSearchParams(location.search); return params.get(name); }
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    const id = getQueryParam('id');
+    renderList();
+    if(id){ openLesson(id); }
+});
+
+// --- Progress tracking ---
+function getProgress(){ return JSON.parse(localStorage.getItem('progress')||'{}'); }
+function saveProgress(p){ localStorage.setItem('progress', JSON.stringify(p)); }
+
+function isCompleted(id){ const p = getProgress(); return !!p[id]; }
+
+function setCompleted(id, val){ const p = getProgress(); if(val) p[id]=true; else delete p[id]; saveProgress(p); updateProgressUI(); }
+
+function updateMarkButton(id){ const btn = document.getElementById('mark-complete'); if(!btn) return; btn.textContent = isCompleted(id)? 'Mark Incomplete' : 'Mark Complete'; }
+
+function updateProgressUI(){
+    const lessons = getLessons().filter(l=>l.published);
+    const p = getProgress();
+    const done = lessons.filter(l=>p[l.id]).length;
+    // simple header indicator
+    let el = document.getElementById('progress-indicator');
+    if(!el){ el = document.createElement('div'); el.id='progress-indicator'; el.style.maxWidth='900px'; el.style.margin='12px auto'; el.style.padding='0 20px'; document.body.insertBefore(el, document.querySelector('main')) }
+    el.innerHTML = `<strong>Progress:</strong> ${done}/${lessons.length} lessons completed`;
+}
+
+// update button behavior when opening a lesson
+function openLesson(id){
+    const lessons = getLessons();
+    const l = lessons.find(x=>x.id===id);
+    if(!l) return alert('Lesson not found');
+    document.getElementById('lesson-render').innerHTML = `<h2>${l.title}</h2><div class="meta">${l.category||''}</div><div class="body">${l.content||'<p>(No content)</p>'}</div>`;
+    document.getElementById('lesson-list').style.display='none';
+    document.getElementById('lesson-content').style.display='block';
+    window.scrollTo(0,0);
+    // mark button state and handler
+    updateMarkButton(id);
+    const btn = document.getElementById('mark-complete');
+    btn.onclick = function(){ const now = !isCompleted(id); setCompleted(id, now); updateMarkButton(id); };
+}
+
+// initialize progress indicator
+document.addEventListener('DOMContentLoaded', ()=>{ updateProgressUI(); });
+</script>
+
+<script src="js/lesson-player.js"></script>
+</body>
+</html>

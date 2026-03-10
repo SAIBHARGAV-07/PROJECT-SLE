@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Admin - Manage Lessons</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <link rel="stylesheet" href="css/admin-lessons.css">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>Admin — Lessons</h1>
+        <div>
+            <button onclick="window.location='admin-dashboard.html'">← Dashboard</button>
+            <button onclick="toggleDark()">Toggle Dark</button>
+        </div>
+    </div>
+</header>
+
+<main class="admin-lessons-page">
+    <section class="lesson-form">
+        <h2>Create / Edit Lesson</h2>
+        <input id="lesson-id" type="hidden">
+        <label>Title</label>
+        <input id="lesson-title" placeholder="Lesson title">
+
+        <label>Category</label>
+        <input id="lesson-category" placeholder="Category (Energy, Waste, etc.)">
+
+        <label>Summary</label>
+        <input id="lesson-summary" placeholder="Short summary">
+
+        <label>Content (HTML allowed)</label>
+        <textarea id="lesson-content" rows="8" placeholder="Lesson content"></textarea>
+
+        <label><input id="lesson-published" type="checkbox"> Published</label>
+
+        <hr>
+        <h3>Quizzes (optional)</h3>
+        <label>Question</label>
+        <input id="quiz-question" placeholder="Quiz question">
+
+        <label>Options (separate with | )</label>
+        <input id="quiz-options" placeholder="Option1 | Option2 | Option3">
+
+        <label>Correct option index (0-based)</label>
+        <input id="quiz-answer" placeholder="0">
+
+        <div style="margin-top:8px;">
+            <button id="add-quiz">Add Quiz</button>
+        </div>
+
+        <div id="quiz-list" style="margin-top:12px;">No quizzes added.</div>
+
+        <div class="form-actions">
+            <button id="save-lesson">Save Lesson</button>
+            <button id="clear-form">Clear</button>
+        </div>
+    </section>
+
+    <section class="lesson-list">
+        <h2>Existing Lessons</h2>
+        <div id="lessons-container">Loading...</div>
+    </section>
+</main>
+
+<script src="js/admin-dashboard.js"></script>
+<script src="js/admin-lessons.js"></script>
+</body>
+</html>

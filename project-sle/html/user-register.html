@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration - Sustainable Living</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+        }
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            opacity: 0.9;
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .register-container {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .register-header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        body.dark .register-header h1 {
+            color: #e0e0e0;
+        }
+
+        .register-header p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        body.dark .register-header p {
+            color: #b0b0b0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        body.dark .form-group label {
+            color: #e0e0e0;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+            color: #2c3e50;
+            font-family: inherit;
+        }
+
+        body.dark .form-group input,
+        body.dark .form-group select {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark .form-group input:focus,
+        body.dark .form-group select:focus {
+            background: #333;
+        }
+
+        .form-group input::placeholder {
+            color: #95a5a6;
+        }
+
+        body.dark .form-group input::placeholder {
+            color: #666;
+        }
+
+        .captcha-section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f5f7fa;
+            border-radius: 8px;
+        }
+
+        body.dark .captcha-section {
+            background: #2a2a2a;
+        }
+
+        .captcha-label {
+            display: block;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        body.dark .captcha-label {
+            color: #e0e0e0;
+        }
+
+        .captcha-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .captcha-container canvas {
+            border: 2px solid #ecf0f1;
+            border-radius: 6px;
+            background: white;
+            padding: 5px;
+        }
+
+        body.dark .captcha-container canvas {
+            background: #1a1a1a;
+            border-color: #444;
+        }
+
+        .captcha-refresh {
+            padding: 8px 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .captcha-refresh:hover {
+            background: #764ba2;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .register-button:active {
+            transform: translateY(0);
+        }
+
+        .login-prompt {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        body.dark .login-prompt {
+            color: #b0b0b0;
+        }
+
+        .login-prompt a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        .dark-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dark-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .error-message {
+            display: none;
+            background: #fee;
+            color: #c0392b;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c0392b;
+        }
+
+        body.dark .error-message {
+            background: #3a1f1f;
+        }
+    </style>
+</head>
+<body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+
+<div class="register-wrapper">
+    <a href="register.html" class="back-button">← Back</a>
+
+    <div class="register-container">
+        <div class="register-header">
+            <div class="logo-icon">👤</div>
+            <h1>Create User Account</h1>
+            <p>Join our learning community</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <form onsubmit="return validateForm()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" required onchange="calculateAge()">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Choose a unique username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="college">College</label>
+                <select id="college" required>
+                    <option value="">Select College</option>
+                    <option>ABC Engineering College</option>
+                    <option>XYZ Institute of Technology</option>
+                    <option>Government Degree College</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course</label>
+                <select id="course" required>
+                    <option value="">Select Course</option>
+                    <option>B.Tech</option>
+                    <option>B.Sc</option>
+                    <option>BCA</option>
+                    <option>MCA</option>
+                    <option>M.Tech</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" onchange="loadStates()" required>
+                        <option value="">Select Country</option>
+                        <option value="India">India</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <select id="state" onchange="loadCities()" required>
+                        <option value="">Select State</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <select id="city" required>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+            </div>
+
+            <div class="captcha-section">
+                <label class="captcha-label">Security Verification</label>
+                <div class="captcha-container">
+                    <canvas id="captchaCanvas" width="160" height="50"></canvas>
+                    <button type="button" class="captcha-refresh" onclick="generateCaptcha()">↻</button>
+                </div>
+                <input type="text" id="captchaInput" class="captcha-input" placeholder="Enter captcha" required>
+            </div>
+
+            <button type="submit" class="register-button">Create Account</button>
+
+            <div class="login-prompt">
+                Already have an account? <a href="user-login.html">Sign In</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/modal.js"></script>
+<script src="js/captcha.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/location.js"></script>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('darkMode', isDark);
+        updateDarkToggleButton();
+    }
+
+    function updateDarkToggleButton() {
+        const btn = document.querySelector('.dark-toggle');
+        if (btn) {
+            if (document.body.classList.contains('dark')) {
+                btn.textContent = '☀️';
+                btn.title = 'Switch to Bright Mode';
+            } else {
+                btn.textContent = '🌙';
+                btn.title = 'Switch to Dark Mode';
+            }
+        }
+    }
+
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+    }
+    updateDarkToggleButton();
+
+    function calculateAge() {
+        const dob = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        document.getElementById('age').value = age;
+    }
+</script>
+
+</body>
+</html>
