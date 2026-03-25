@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Sustainable Living</title>
+    <link rel="stylesheet" href="css/user-dashboard.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="top-header">
+    <div class="header-left">
+        <h1>🌱 Sustainable Living</h1>
+    </div>
+    <div class="header-right">
+        <div class="search-box">
+            <input type="text" placeholder="Search courses...">
+        </div>
+        <button class="icon-btn" onclick="toggleDark()" title="Toggle Dark Mode">🌙</button>
+        <div class="profile-menu">
+            <button class="profile-btn" onclick="toggleProfile()">👤</button>
+            <div class="profile-dropdown" id="profileDropdown">
+                <a href="#" onclick="editProfile()">Edit Profile</a>
+                <a href="#" onclick="settings()">Settings</a>
+                <hr>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <nav class="nav-menu">
+        <a href="#" class="nav-item active" onclick="switchTab('dashboard', event)">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('lessons', event)">
+            <span class="icon">📘</span>
+            <span>Lessons</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('projects', event)">
+            <span class="icon">🌱</span>
+            <span>Projects</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('achievements', event)">
+            <span class="icon">🏆</span>
+            <span>Achievements</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('leaderboard', event)">
+            <span class="icon">👥</span>
+            <span>Leaderboard</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('progress', event)">
+            <span class="icon">📈</span>
+            <span>Progress</span>
+        </a>
+    </nav>
+</div>
+
+<!-- Main Content -->
+<div class="main-container">
+
+    <!-- Dashboard Section -->
+    <section id="dashboard-section" class="tab-section active">
+        <div class="welcome-banner">
+            <div class="banner-content">
+                <h2 id="welcomeText">Welcome back, Learner! 👋</h2>
+                <p>You're on the path to becoming an eco-warrior. Keep up the great work!</p>
+            </div>
+            <div class="banner-stats">
+                <div class="mini-stat">
+                    <span class="value">7</span>
+                    <span class="label">Day Streak</span>
+                </div>
+                <div class="mini-stat">
+                    <span class="value">850</span>
+                    <span class="label">Total Points</span>
+                </div>
+                <div class="mini-stat">
+                    <span class="value">Level 8</span>
+                    <span class="label">Current Level</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <section class="quick-stats">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <h3>21</h3>
+                    <p>Lessons Completed</p>
+                    <div class="progress-small" style="width: 70%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-content">
+                    <h3>5</h3>
+                    <p>Projects Joined</p>
+                    <div class="progress-small" style="width: 45%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-content">
+                    <h3>85%</h3>
+                    <p>Eco Score</p>
+                    <div class="progress-small" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <h3>3</h3>
+                    <p>Achievements</p>
+                    <div class="progress-small" style="width: 60%"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Cards -->
+        <section class="action-cards">
+            <div class="card large-card" onclick="goTo('lesson.html')">
+                <div class="card-header">
+                    <span class="card-icon">📘</span>
+                    <span class="card-badge">3 New</span>
+                </div>
+                <h3>Continue Learning</h3>
+                <p>Resume your lessons and earn points</p>
+                <button class="card-btn">Start Now →</button>
+            </div>
+
+            <div class="card large-card" onclick="goTo('project.html')">
+                <div class="card-header">
+                    <span class="card-icon">🌱</span>
+                    <span class="card-badge">Active</span>
+                </div>
+                <h3>Active Projects</h3>
+                <p>Participate in eco-friendly initiatives</p>
+                <button class="card-btn">Explore →</button>
+            </div>
+
+            <div class="card large-card" onclick="goTo('progress.html')">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <span class="card-badge">Weekly</span>
+                </div>
+                <h3>Your Progress</h3>
+                <p>Track your sustainability journey</p>
+                <button class="card-btn">View Details →</button>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="recent-activity">
+            <h3>📌 Recent Activity</h3>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon">✅</div>
+                    <div class="activity-content">
+                        <p><strong>Completed</strong> "Energy Conservation 101" lesson</p>
+                        <span class="activity-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">🏅</div>
+                    <div class="activity-content">
+                        <p><strong>Earned Badge:</strong> "Water Guardian" for 10/10 on water conservation quiz</p>
+                        <span class="activity-time">1 day ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">👥</div>
+                    <div class="activity-content">
+                        <p><strong>Joined</strong> "Plastic-Free Challenge" project</p>
+                        <span class="activity-time">3 days ago</span>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon">⭐</div>
+                    <div class="activity-content">
+                        <p><strong>Ranking Updated:</strong> You're now #5 on the leaderboard!</p>
+                        <span class="activity-time">5 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section class="certificates-section">
+            <h3>🎓 Certificates & Badges</h3>
+            <div class="badges-grid">
+                <div class="badge-item">
+                    <div class="badge-icon">🌿</div>
+                    <p>Green Starter</p>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">💧</div>
+                    <p>Water Guardian</p>
+                </div>
+                <div class="badge-item">
+                    <div class="badge-icon">♻️</div>
+                    <p>Recycling Master</p>
+                </div>
+                <div class="badge-item locked">
+                    <div class="badge-icon">🌍</div>
+                    <p>Eco Warrior</p>
+                    <span class="lock">🔒</span>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard-section" class="tab-section">
+        <div class="section-header">
+            <h2>🏆 Global Leaderboard</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterLeaderboard('all', event)">All Time</button>
+                <button class="filter-btn" onclick="filterLeaderboard('month', event)">This Month</button>
+                <button class="filter-btn" onclick="filterLeaderboard('week', event)">This Week</button>
+            </div>
+        </div>
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Points</th>
+                    <th>Level</th>
+                    <th>Badge</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboardBody"></tbody>
+        </table>
+    </section>
+
+    <!-- Lessons Section -->
+    <section id="lessons-section" class="tab-section">
+        <div class="section-header">
+            <h2>📘 My Lessons</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterLessons('all', event)">All</button>
+                <button class="filter-btn" onclick="filterLessons('in-progress', event)">In Progress</button>
+                <button class="filter-btn" onclick="filterLessons('completed', event)">Completed</button>
+            </div>
+        </div>
+        <div class="lessons-container" id="lessonsContainer">
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <h3>Energy Conservation 101</h3>
+                    <span class="lesson-badge">In Progress</span>
+                </div>
+                <p>Learn about renewable energy and energy-efficient practices</p>
+                <div class="lesson-progress">
+                    <div class="progress-bar" style="width: 65%"></div>
+                </div>
+                <span class="progress-text">65% Complete</span>
+                <button class="lesson-btn" onclick="viewLesson('energy-101')">Continue Learning →</button>
+            </div>
+            
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <h3>Water Conservation Basics</h3>
+                    <span class="lesson-badge completed">Completed</span>
+                </div>
+                <p>Master water-saving techniques and conservation methods</p>
+                <div class="lesson-progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-text">100% Complete ✓</span>
+                <button class="lesson-btn" onclick="reviewLesson('water-101')">Review →</button>
+            </div>
+            
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <h3>Waste Reduction Strategies</h3>
+                    <span class="lesson-badge">In Progress</span>
+                </div>
+                <p>Understand recycling and waste management techniques</p>
+                <div class="lesson-progress">
+                    <div class="progress-bar" style="width: 45%"></div>
+                </div>
+                <span class="progress-text">45% Complete</span>
+                <button class="lesson-btn" onclick="viewLesson('waste-101')">Continue Learning →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects-section" class="tab-section">
+        <div class="section-header">
+            <h2>🌱 My Projects</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterProjects('all', event)">All</button>
+                <button class="filter-btn" onclick="filterProjects('active', event)">Active</button>
+                <button class="filter-btn" onclick="filterProjects('completed', event)">Completed</button>
+            </div>
+        </div>
+        <div class="projects-container" id="projectsContainer">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Plastic-Free Challenge</h3>
+                    <span class="project-badge active">Active</span>
+                </div>
+                <p>30-day challenge to reduce plastic consumption</p>
+                <div class="project-stats">
+                    <span>👥 125 Participants</span>
+                    <span>⏱️ 15 Days Left</span>
+                </div>
+                <button class="project-btn" onclick="joinProject('plastic-free')">View Details →</button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Urban Gardening Initiative</h3>
+                    <span class="project-badge active">Active</span>
+                </div>
+                <p>Growing fresh vegetables in urban spaces</p>
+                <div class="project-stats">
+                    <span>👥 89 Participants</span>
+                    <span>⏱️ 45 Days Remaining</span>
+                </div>
+                <button class="project-btn" onclick="joinProject('urban-garden')">View Details →</button>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Tree Planting Drive</h3>
+                    <span class="project-badge completed">Completed</span>
+                </div>
+                <p>Community tree planting and forest restoration</p>
+                <div class="project-stats">
+                    <span>🌳 500+ Trees Planted</span>
+                    <span>✓ Campaign Completed</span>
+                </div>
+                <button class="project-btn" onclick="viewProjectResults('tree-planting')">View Results →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements-section" class="tab-section">
+        <div class="section-header">
+            <h2>🏆 Achievements & Badges</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterAchievements('all', event)">All</button>
+                <button class="filter-btn" onclick="filterAchievements('unlocked', event)">Unlocked</button>
+                <button class="filter-btn" onclick="filterAchievements('locked', event)">Locked</button>
+            </div>
+        </div>
+        <div class="achievements-container">
+            <div class="achievement-item">
+                <div class="achievement-icon">🌿</div>
+                <h4>Green Starter</h4>
+                <p>Complete your first lesson</p>
+                <div class="unlock-date">Unlocked on Jan 15, 2026</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon">💧</div>
+                <h4>Water Guardian</h4>
+                <p>Complete water conservation course</p>
+                <div class="unlock-date">Unlocked on Jan 28, 2026</div>
+            </div>
+            
+            <div class="achievement-item">
+                <div class="achievement-icon">♻️</div>
+                <h4>Recycling Master</h4>
+                <p>Score 100% on waste reduction quiz</p>
+                <div class="unlock-date">Unlocked on Feb 5, 2026</div>
+            </div>
+            
+            <div class="achievement-item locked">
+                <div class="achievement-icon">🌍</div>
+                <h4>Eco Warrior</h4>
+                <p>Complete 10 lessons and 5 projects</p>
+                <div class="unlock-date">Progress: 7/10 lessons, 2/5 projects</div>
+            </div>
+            
+            <div class="achievement-item locked">
+                <div class="achievement-icon">⚡</div>
+                <h4>Energy Expert</h4>
+                <p>Master energy conservation course</p>
+                <div class="unlock-date">Locked</div>
+            </div>
+            
+            <div class="achievement-item locked">
+                <div class="achievement-icon">🎓</div>
+                <h4>Educator</h4>
+                <p>Help 10 other learners</p>
+                <div class="unlock-date">Progress: 2/10 learners helped</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress-section" class="tab-section">
+        <div class="section-header">
+            <h2>📈 Learning Progress</h2>
+        </div>
+        
+        <div class="progress-overview">
+            <div class="progress-card">
+                <h3>Total Learning Time</h3>
+                <p class="stat-value">24h 35m</p>
+                <p class="stat-label">Increase from last week: +3h 20m</p>
+            </div>
+            <div class="progress-card">
+                <h3>Lessons This Month</h3>
+                <p class="stat-value">8</p>
+                <p class="stat-label">Target: 10 lessons</p>
+            </div>
+            <div class="progress-card">
+                <h3>Consistency Score</h3>
+                <p class="stat-value">92%</p>
+                <p class="stat-label">7 day streak</p>
+            </div>
+            <div class="progress-card">
+                <h3>Points Earned</h3>
+                <p class="stat-value">850</p>
+                <p class="stat-label">Rank: #5 Globally</p>
+            </div>
+        </div>
+
+        <div class="progress-charts">
+            <div class="chart-card">
+                <h3>Weekly Activity</h3>
+                <div class="activity-chart">
+                    <div class="bar-item">
+                        <div class="bar" style="height: 60%"></div>
+                        <span>Mon</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 85%"></div>
+                        <span>Tue</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 45%"></div>
+                        <span>Wed</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 90%"></div>
+                        <span>Thu</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 70%"></div>
+                        <span>Fri</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 50%"></div>
+                        <span>Sat</span>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 80%"></div>
+                        <span>Sun</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3>Learning by Category</h3>
+                <div class="category-stats">
+                    <div class="category-item">
+                        <div class="category-bar" style="width: 35%"></div>
+                        <span>Energy (35%)</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-bar" style="width: 25%"></div>
+                        <span>Water (25%)</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-bar" style="width: 20%"></div>
+                        <span>Waste (20%)</span>
+                    </div>
+                    <div class="category-item">
+                        <div class="category-bar" style="width: 20%"></div>
+                        <span>Lifestyle (20%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="milestones">
+            <h3>🎯 Upcoming Milestones</h3>
+            <div class="milestone-item">
+                <div class="milestone-check">✓</div>
+                <div class="milestone-content">
+                    <p><strong>25 Lessons Completed</strong> - 21/25</p>
+                    <div class="milestone-progress" style="width: 84%"></div>
+                </div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-check">◯</div>
+                <div class="milestone-content">
+                    <p><strong>1000 Points Earned</strong> - 850/1000</p>
+                    <div class="milestone-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-check">◯</div>
+                <div class="milestone-content">
+                    <p><strong>Reach Level 10</strong> - Level 8/10</p>
+                    <div class="milestone-progress" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 Sustainable Living Education Platform | Building a greener future together</p>
+</footer>
+
+<script src="js/user-dashboard.js"></script>
+</body>
+
+</html>

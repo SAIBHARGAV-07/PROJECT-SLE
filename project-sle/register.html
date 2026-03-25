@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Sustainable Living</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            transition: background 0.3s ease;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .auth-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .auth-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .register-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .register-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border-top: 4px solid #667eea;
+        }
+
+        .register-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            border-top-color: #764ba2;
+        }
+
+        .register-card.admin {
+            border-top-color: #e74c3c;
+        }
+
+        .register-card.admin:hover {
+            border-top-color: #c0392b;
+        }
+
+        .card-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .register-card h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .register-card p {
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .register-btn {
+            display: inline-block;
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .register-card.admin .register-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .register-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .dark-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        body.dark .register-card {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.dark .register-card h2 {
+            color: #e0e0e0;
+        }
+
+        body.dark .register-card p {
+            color: #b0b0b0;
+        }
+
+        body.dark .auth-header h1,
+        body.dark .auth-header p {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .auth-header h1 {
+                font-size: 32px;
+            }
+
+            .auth-header p {
+                font-size: 16px;
+            }
+
+            .register-card {
+                padding: 30px;
+            }
+
+            .card-icon {
+                font-size: 48px;
+            }
+
+            .register-card h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button class="dark-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌙</button>
+
+<div class="auth-container">
+    <div class="auth-header">
+        <div class="logo">🌱</div>
+        <h1>Create Your Account</h1>
+        <p>Choose your account type to get started</p>
+    </div>
+
+    <div class="register-options">
+        <a href="user-register.html" class="register-card user">
+            <div class="card-icon">👤</div>
+            <h2>User Registration</h2>
+            <p>Join as a learner to explore courses and track your sustainable living journey</p>
+            <button class="register-btn">Sign Up as User</button>
+        </a>
+
+        <a href="admin-register.html" class="register-card admin">
+            <div class="card-icon">🏫</div>
+            <h2>Admin Registration</h2>
+            <p>Register as an educator to create courses and manage learners</p>
+            <button class="register-btn">Sign Up as Admin</button>
+        </a>
+    </div>
+
+    <div style="text-align: center; color: white; margin-top: 30px;">
+        <p>Already have an account? <a href="login.html" style="color: #ffd700; text-decoration: none; font-weight: 600;">Sign In</a></p>
+    </div>
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('darkMode', isDark);
+        updateDarkToggleButton();
+    }
+
+    function updateDarkToggleButton() {
+        const btn = document.querySelector('.dark-toggle');
+        if (btn) {
+            if (document.body.classList.contains('dark')) {
+                btn.textContent = '☀️';
+                btn.title = 'Switch to Bright Mode';
+            } else {
+                btn.textContent = '🌙';
+                btn.title = 'Switch to Dark Mode';
+            }
+        }
+    }
+
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark');
+    }
+    updateDarkToggleButton();
+</script>
+
+</body>
+</html>
