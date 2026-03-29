@@ -95,16 +95,6 @@ To run this platform on your local machine, follow these steps:
    *Optional but recommended: Run a local development server for a better experience, particularly for handling external resource loads properly.*
    - If using **VS Code**, you can install and use the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
    - Using **Python** (if installed): `python -m http.server 8000` or `python3 -m http.server 8000`
-
-## 🌍 Deployment
-
-This site is statically hosted on **Vercel**. To deploy your own version:
-
-1. Create an account on [Vercel](https://vercel.com/).
-2. Import your GitHub repository containing the `project-sle` codebase.
-3. Keep default settings (since this is an HTML/CSS/JS site without build steps).
-4. Click **Deploy**. Vercel will process it and provide a live URL!
-
 ---
 
 *Made with 🌱 to build a better future, one choice at a time.*
